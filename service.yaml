@@ -11,3 +11,4 @@ spec:
       - image: bookshelf-app-image
         ports:
         - containerPort: 8080
+#
