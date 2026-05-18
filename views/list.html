@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Your Library</h2>
+    <a href="/books/add" class="btn btn-primary btn-lg shadow-sm">+ Add New Book</a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for book in books %}
+    <div class="col">
+        <div class="card h-100">
+            {% if book.imageUrl %}
+                <img src="{{book.imageUrl}}" class="card-img-top book-img" alt="cover">
+            {% else %}
+                <img src="https://storage.googleapis.com/cloud-training/devapps-foundations/no-cover.png" class="card-img-top book-img" alt="no cover">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-dark">{{book.title}}</h5>
+                <p class="card-text text-muted">By {{book.author}}</p>
+                <a href="/books/{{book.id}}" class="btn btn-outline-primary btn-sm w-100">Details</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center py-5">
+        <p class="text-muted fs-4">No books found in your Firestore collection.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
