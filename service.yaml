@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: bookshelf-app
+  namespace: default
+spec:
+  template:
+    spec:
+      serviceAccountName: bookshelf-run-sa@sara-sandbox-interns.iam.gserviceaccount.com
+      containers:
+      - image: bookshelf-app-image
+        ports:
+        - containerPort: 8080

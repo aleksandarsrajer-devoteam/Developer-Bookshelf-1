@@ -10,3 +10,14 @@ steps:
     args: 
       - 'push'
       - 'europe-west1-docker.pkg.dev/sara-sandbox-interns/bookshelf-repo/bookshelf-app:$SHORT_SHA'
+      
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'deploy'
+      - 'releases'
+      - 'create'
+      - 'release-$SHORT_SHA' # Svaki release ima jedinstveno ime po Git SHA
+      - '--delivery-pipeline=bookshelf-pipeline' # Gađa onaj pipeline iz Terraforma
+      - '--region=europe-west1'
+      - '--images=bookshelf-app-image=europe-west1-docker.pkg.dev/sara-sandbox-interns/bookshelf-repo/bookshelf-app:$SHORT_SHA'    
